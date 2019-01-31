@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+const items = require('./routes/api/items');
+
 const app = express();
 
 // bodyparser middleware
@@ -14,6 +16,9 @@ const db = require('./config/keys').mongoURI;
 mongoose.connect(db)
   .then(() => console.log('mongoDB Connected'))
   .catch(err => console.log(err));
+
+// use routes
+ app.use('/api/items', items);
 
   // to deploy with heroku
 const port = process.env.PORT || 5000;
